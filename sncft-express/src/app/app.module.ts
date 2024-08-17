@@ -7,20 +7,40 @@ import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { FleetComponent } from './pages/fleet/fleet.component';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AngularToolbarComponent } from './components/angular-toolbar/angular-toolbar.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatInputModule} from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MapComponent } from './pages/map/map.component';
+import { FreightComponent } from './pages/freight/freight.component';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
     SchedulesComponent,
-    FleetComponent
+    FleetComponent,
+    AngularToolbarComponent,
+    MapComponent,
+    FreightComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatTabsModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

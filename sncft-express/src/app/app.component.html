@@ -1,6 +1,11 @@
-<a routerLink=''>home</a><br>
-<a routerLink='dashboard'>dashboard</a><br>
-<a routerLink='schedules'>schedules</a><br>
-<a routerLink='fleet'>fleet</a>
+<app-angular-toolbar></app-angular-toolbar>
+<mat-tab-group (selectedTabChange)="onTabChange($event)" *ngIf="currentRoute !== '/'">
+  <mat-tab label="Dashboard"></mat-tab>
+  <mat-tab label="Operations"></mat-tab>
+  <mat-tab label="Fleet"></mat-tab>
+  <mat-tab label="freight"></mat-tab>
+  <mat-tab label="map"></mat-tab>
+</mat-tab-group>
+  
 
 <router-outlet></router-outlet>

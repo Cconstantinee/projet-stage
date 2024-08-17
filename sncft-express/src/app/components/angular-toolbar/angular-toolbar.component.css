@@ -1,0 +1,8 @@
+/* your-component.component.css */
+a.normal-text-link {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Inherits the color from parent or specify a color */
+    font-weight: inherit; /* Ensures the font weight is normal */
+    
+  }
+  

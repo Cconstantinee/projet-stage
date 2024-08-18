@@ -17,6 +17,17 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MapComponent } from './pages/map/map.component';
 import { FreightComponent } from './pages/freight/freight.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import { SchedulesTableComponent } from './components/schedules-table/schedules-table.component';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
+import { ActivityTableComponent } from './components/activity-table/activity-table.component';
+import { OperationInfoComponent } from './components/operation-info/operation-info.component';
+import {MatDividerModule} from '@angular/material/divider';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +37,11 @@ import {MatButtonModule} from '@angular/material/button';
     FleetComponent,
     AngularToolbarComponent,
     MapComponent,
-    FreightComponent
+    FreightComponent,
+    SchedulesTableComponent,
+    ActivityTableComponent,
+    OperationInfoComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -36,7 +51,13 @@ import {MatButtonModule} from '@angular/material/button';
     MatSlideToggleModule,
     MatInputModule,
     MatTabsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatSortModule,
+    MatIconModule,
+    MatButtonToggleModule,
+    FormsModule,
+    MatDividerModule
   ],
   providers: [
     provideAnimationsAsync()

@@ -6,6 +6,7 @@ import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { FleetComponent } from './pages/fleet/fleet.component';
 import { MapComponent } from './pages/map/map.component';
 import { FreightComponent } from './pages/freight/freight.component';
+import { OperationInfoComponent } from './components/operation-info/operation-info.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent,title:'home'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'operations',component:SchedulesComponent,title:'operations'},
   {path:'fleet',component:FleetComponent,title:'fleet'},
   {path:'map',component:MapComponent,title:'map'},
-  {path:'freight',component:FreightComponent,title:'freight'}
+  {path:'freight',component:FreightComponent,title:'freight'},
+  {path:'operations/:OpId',component:OperationInfoComponent,title:'details'}
   ];
 
 @NgModule({

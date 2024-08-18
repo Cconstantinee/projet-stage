@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './schedules.component.css'
 })
 export class SchedulesComponent {
-
+  selectedValue = 'trackerTable';
 }

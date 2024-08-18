@@ -1,0 +1,16 @@
+.example-container {
+    height: 500px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  .info-column {
+    width: 48px; /* Adjust this value if needed */
+    text-align: center; /* Center the icon horizontally */
+  }

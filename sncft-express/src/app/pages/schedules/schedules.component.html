@@ -1,1 +1,20 @@
-<p>schedules works!</p>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col col-2 bg-danger text-center">
+            hello
+        </div>
+        <div class="col col-10 text-center">
+            <div class="container-fluid m-2 p-2">
+                <mat-button-toggle-group name="operations-tabs" aria-label="operations tabs" class="my-2" [(ngModel)]="selectedValue">
+                    <mat-button-toggle value="trackerTable">Activity Tracker</mat-button-toggle>
+                    <mat-button-toggle value="schedulesTable">Schedules</mat-button-toggle>
+                </mat-button-toggle-group>
+                    
+                <app-schedules-table *ngIf="selectedValue==='schedulesTable'"></app-schedules-table>
+                <app-activity-table *ngIf="selectedValue==='trackerTable'"></app-activity-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -87,7 +87,7 @@ export class SchedulesTableComponent implements AfterViewInit {
   }
   showMoreInfo(schedule: SchedulesTable) {
     console.log(schedule.OpId);
-    this.router.navigate(['/operations',schedule.OpId]);
+    this.router.navigate(['/op-details',schedule.OpId]);
   }
 }
 

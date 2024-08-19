@@ -116,7 +116,7 @@ export class ActivityTableComponent implements AfterViewInit {
   
   showMoreInfo(schedule: TrainSchedule) {
     console.log(schedule.trainId);
-    this.router.navigate(['/fleet',schedule.trainId]);
+    this.router.navigate(['/train-details',schedule.trainId]);
   }
   //might moove to a service--------------------------------------------
 

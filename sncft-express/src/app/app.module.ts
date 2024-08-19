@@ -30,7 +30,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FilterTableComponent } from './components/filter-table/filter-table.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { TrainInfoComponent } from './components/train-info/train-info.component'; 
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     SchedulesTableComponent,
     ActivityTableComponent,
     OperationInfoComponent,
+    TrainInfoComponent,
     
     
     

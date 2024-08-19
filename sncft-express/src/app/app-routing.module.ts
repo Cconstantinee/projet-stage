@@ -7,6 +7,7 @@ import { FleetComponent } from './pages/fleet/fleet.component';
 import { MapComponent } from './pages/map/map.component';
 import { FreightComponent } from './pages/freight/freight.component';
 import { OperationInfoComponent } from './components/operation-info/operation-info.component';
+import { TrainInfoComponent } from './components/train-info/train-info.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent,title:'home'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'fleet',component:FleetComponent,title:'fleet'},
   {path:'map',component:MapComponent,title:'map'},
   {path:'freight',component:FreightComponent,title:'freight'},
-  {path:'operations/:OpId',component:OperationInfoComponent,title:'details'}
+  {path:'op-details/:OpId',component:OperationInfoComponent,title:'operation'},
+  {path:'train-details/:trainId',component:TrainInfoComponent,title:'train'}
   ];
 
 @NgModule({

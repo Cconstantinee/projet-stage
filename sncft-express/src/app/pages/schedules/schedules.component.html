@@ -1,13 +1,29 @@
-<div class="container-fluid ">
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col col-2 bg-danger text-center">
-            hello
+        
+        <div class="col-2 py-2">
+            <div class="py-2">
+                <div class="p-2">
+                    <mat-slide-toggle>Real-time tracking</mat-slide-toggle>
+                </div>
+                <mat-divider></mat-divider><br>
+                <mat-accordion >
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title><mat-icon>filter_list</mat-icon><span> Filters </span></mat-panel-title>  
+                        </mat-expansion-panel-header>
+                        <!--filter selects-->
+                        <app-filter-table></app-filter-table> 
+                      </mat-expansion-panel>
+                </mat-accordion>
+            </div>
         </div>
-        <div class="col col-10 text-center">
-            <div class="container-fluid m-2 p-2">
-                <mat-button-toggle-group name="operations-tabs" aria-label="operations tabs" class="my-2" [(ngModel)]="selectedValue">
-                    <mat-button-toggle value="trackerTable">Activity Tracker</mat-button-toggle>
-                    <mat-button-toggle value="schedulesTable">Schedules</mat-button-toggle>
+        <div class="col-10">
+            <div class="p-2">
+                <mat-button-toggle-group name="operations-tabs" aria-label="operations tabs" class="my-2" [(ngModel)]="selectedValue" (ngModelChange)="updateLocalStorage()">
+                    <mat-button-toggle value="trackerTable">Train tracker</mat-button-toggle>
+                    <mat-button-toggle value="schedulesTable">Shipment tracker</mat-button-toggle>
                 </mat-button-toggle-group>
                     
                 <app-schedules-table *ngIf="selectedValue==='schedulesTable'"></app-schedules-table>

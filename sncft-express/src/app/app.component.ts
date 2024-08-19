@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { StorageServiceService } from './services/storage-service.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class AppComponent {
   selectedTabIndex = 0;
   title = 'sncft-express';
   currentRoute: string | undefined;
-  constructor(private router:Router,private activatedRoute: ActivatedRoute){
+  constructor(private router:Router,private activatedRoute: ActivatedRoute, private storageService:StorageServiceService){
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     })
@@ -43,6 +44,7 @@ export class AppComponent {
           this.updateSelectedTab(event.urlAfterRedirects);
         }
       });
+      this.storageService.setItem('active_operations_tab', 'trackerTable');
     }
   
     updateSelectedTab(url: string): void {

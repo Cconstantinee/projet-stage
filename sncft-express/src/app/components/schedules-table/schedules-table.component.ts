@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   template: `
     <!-- start of the table ---------------------------------->
     <mat-form-field appearance="fill">
-  <mat-label>Search</mat-label>
+  
   <input matInput (keyup)="applyFilter($event)" placeholder="Search">
   <button mat-icon-button matSuffix disabled>
     <mat-icon>search</mat-icon>

@@ -26,7 +26,11 @@ import { FormsModule } from '@angular/forms';
 import { ActivityTableComponent } from './components/activity-table/activity-table.component';
 import { OperationInfoComponent } from './components/operation-info/operation-info.component';
 import {MatDividerModule} from '@angular/material/divider';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { FilterTableComponent } from './components/filter-table/filter-table.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import {MatDividerModule} from '@angular/material/divider';
     FreightComponent,
     SchedulesTableComponent,
     ActivityTableComponent,
-    OperationInfoComponent
+    OperationInfoComponent,
+    
+    
     
   ],
   imports: [
@@ -57,8 +63,13 @@ import {MatDividerModule} from '@angular/material/divider';
     MatIconModule,
     MatButtonToggleModule,
     FormsModule,
-    MatDividerModule
-  ],
+    MatDividerModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    FilterTableComponent
+],
   providers: [
     provideAnimationsAsync()
   ],

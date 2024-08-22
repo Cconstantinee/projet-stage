@@ -1,6 +1,6 @@
 
 .example-container {
-    height: 500px;
+    
     overflow: auto;
   }
   
@@ -15,3 +15,8 @@
     width: 48px; /* Adjust this value if needed */
     text-align: center; /* Center the icon horizontally */
   }
+  .hide-header {
+    /* Hide the header cell */
+    display: none;
+  }
+ 

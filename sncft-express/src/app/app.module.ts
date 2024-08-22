@@ -32,7 +32,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TrainInfoComponent } from './components/train-info/train-info.component'; 
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { WidgetComponent } from './components/widget/widget.component';
+import {MatCardModule} from '@angular/material/card';
+import { InteractiveMap1Component } from './components/interactive-map-1/interactive-map-1.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +50,8 @@ import { TrainInfoComponent } from './components/train-info/train-info.component
     ActivityTableComponent,
     OperationInfoComponent,
     TrainInfoComponent,
+    WidgetComponent,
+    InteractiveMap1Component
     
     
     
@@ -70,7 +75,9 @@ import { TrainInfoComponent } from './components/train-info/train-info.component
     MatSelectModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    FilterTableComponent
+    FilterTableComponent,
+    MatGridListModule,
+    MatCardModule
 ],
   providers: [
     provideAnimationsAsync()

@@ -1,4 +1,4 @@
-import { Component,AfterViewInit, ViewChild } from '@angular/core';
+import { Component,AfterViewInit, ViewChild, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,26 +6,26 @@ import { Router } from '@angular/router';
   selector: 'app-schedules-table',
   template: `
     <!-- start of the table ---------------------------------->
-    <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" *ngIf="isWidget==false">
   
   <input matInput (keyup)="applyFilter($event)" placeholder="Search">
   <button mat-icon-button matSuffix disabled>
     <mat-icon>search</mat-icon>
   </button>
 </mat-form-field>
-  <div class="example-container">
+  <div class="example-container" [style.height]="size" [ngClass]="{'no-scrollbar': isWidget}">
     
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <!-- Position Column -->
     <ng-container matColumnDef="OpId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Op Id. </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Op Id. </th>
       <td mat-cell *matCellDef="let schedule"> {{schedule.OpId}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="departure">
-      <th mat-header-cell *matHeaderCellDef> Departure </th>
+      <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Departure </th>
       <td mat-cell *matCellDef="let schedule">
       {{schedule.departure_location}}<br>
     <span style="color: gray;">{{schedule.departure_time | date:'short'}}</span>
@@ -34,7 +34,7 @@ import { Router } from '@angular/router';
 
     <!-- Weight Column -->
     <ng-container matColumnDef="arrival">
-      <th mat-header-cell *matHeaderCellDef> Arrival </th>
+      <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Arrival </th>
       <td mat-cell *matCellDef="let schedule">
       {{schedule.arrival_location}}<br>
     <span style="color: gray;">{{schedule.arrival_time | date:'short'}}</span>
@@ -43,17 +43,17 @@ import { Router } from '@angular/router';
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="freight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Freight </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Freight </th>
       <td mat-cell *matCellDef="let schedule"> {{schedule.freight}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Status </th>
       <td mat-cell *matCellDef="let schedule"> {{schedule.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="info">
-      <th mat-header-cell *matHeaderCellDef> details </th>
+      <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> details </th>
       <td mat-cell *matCellDef="let schedule" class="info-column">
         <button mat-icon-button (click)="showMoreInfo(schedule)">
           <mat-icon style="color: green;">keyboard_arrow_right</mat-icon>
@@ -61,7 +61,7 @@ import { Router } from '@angular/router';
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" [ngClass]="{'hide-header': isWidget}"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
@@ -69,6 +69,8 @@ import { Router } from '@angular/router';
   styleUrl: './schedules-table.component.css'
 })
 export class SchedulesTableComponent implements AfterViewInit {
+  @Input() isWidget:boolean=false;
+  @Input() size:string="500px";
   displayedColumns = ['OpId', 'departure', 'arrival', 'freight','status','info'];
   dataSource = new MatTableDataSource(schedulesData);
   @ViewChild(MatSort) sort!: MatSort;
@@ -79,6 +81,7 @@ export class SchedulesTableComponent implements AfterViewInit {
 
   ngAfterViewInit(){
     this.dataSource.sort=this.sort;
+   
   }
   applyFilter(event: Event) {
     const input = event.target as HTMLInputElement;

@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
     <mat-toolbar color="primary">
     
     <a routerLink="" class="normal-text-link"><span>SNCFTexpress</span></a>
-    <a mat-button routerLink="login">login<span><mat-icon>account_circle</mat-icon></span></a>
+    <div class="custom-spacer"></div>
+    <a mat-button>schedule manifest</a>
+    <a mat-button>about</a>
+    <a mat-button routerLink="login"> login <mat-icon>account_circle</mat-icon></a>
+    
+    
   </mat-toolbar>
   `,
   styleUrl: './angular-toolbar.component.css'

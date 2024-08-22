@@ -5,7 +5,7 @@ import { Component,Input, OnInit } from '@angular/core';
   template: `
     <div class="p-2">
     <mat-card appearance="raised" [style.height]="widget_height">
-      <mat-card-header class="spaced-header">
+      <mat-card-header class="spaced-header z-1">
         <mat-card-title class="d-flex mb-2">
           {{widget_title}}
           <div *ngIf="widget_index==3||widget_index==4" class="mx-3" style="position:relative;bottom:2px">

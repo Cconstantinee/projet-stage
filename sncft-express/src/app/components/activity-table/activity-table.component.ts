@@ -1,4 +1,4 @@
-import { Component,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,90 +6,80 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-activity-table',
   template: `
-  
-<mat-form-field appearance="fill">
-  <input matInput (input)="applyFilter($event)" placeholder="Search">
-  <button mat-icon-button matSuffix disabled>
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-form-field>
-  <div class="example-container">
-    
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-    <!-- Train ID Column -->
-    <ng-container matColumnDef="trainId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Train Id </th>
-      <td mat-cell *matCellDef="let schedule"> {{schedule.trainId}} </td>
-    </ng-container>
-
-    <!-- Departure Column -->
-    <ng-container matColumnDef="departure">
-      <th mat-header-cell *matHeaderCellDef> Departure </th>
-      <td mat-cell *matCellDef="let schedule">
-        {{schedule.departure.location}}<br>
-        <span style="color: gray;">{{schedule.departure.time | date:'short'}}</span>
-      </td>
-    </ng-container>
-
-    <!-- Arrival Column -->
-    <ng-container matColumnDef="arrival">
-      <th mat-header-cell *matHeaderCellDef> Arrival </th>
-      <td mat-cell *matCellDef="let schedule">
-        {{schedule.arrival.location}}<br>
-        <span style="color: gray;">{{schedule.arrival.time | date:'short'}}</span>
-      </td>
-    </ng-container>
-
-    <!-- Last Location Column -->
-    <ng-container matColumnDef="lastLocation">
-  <th mat-header-cell *matHeaderCellDef> Last Location </th>
-  <td mat-cell *matCellDef="let schedule">
-    {{schedule.lastLocation.location}}<br>
-    <span style="color: gray;">Last Updated: {{schedule.lastLocation.lastUpdated | date:'short'}}</span>
-  </td>
-</ng-container>
-
-    <!-- Freight Column -->
-    <ng-container matColumnDef="freight">
-      <th mat-header-cell *matHeaderCellDef> Freight </th>
-      <td mat-cell *matCellDef="let schedule"> 
-        <ng-container *ngIf="schedule.freight.length > 0; else noFreight">
-          {{schedule.freight.join(', ')}}
+    <mat-form-field appearance="fill" *ngIf="!isWidget">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+      <button mat-icon-button matSuffix disabled>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="example-container" [style.height]="size" [ngClass]="{'no-scrollbar': isWidget}">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="trainId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Train Id </th>
+          <td mat-cell *matCellDef="let schedule"> {{schedule.trainId}} </td>
         </ng-container>
-        <ng-template #noFreight>No Cargo</ng-template>
-      </td>
-    </ng-container>
 
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-      <td mat-cell *matCellDef="let schedule"> {{schedule.status}} </td>
-    </ng-container>
+        <ng-container matColumnDef="departure">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Departure </th>
+          <td mat-cell *matCellDef="let schedule">
+            {{schedule.departure.location}}<br>
+            <span style="color: gray;">{{schedule.departure.time | date:'short'}}</span>
+          </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <ng-container matColumnDef="arrival">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Arrival </th>
+          <td mat-cell *matCellDef="let schedule">
+            {{schedule.arrival.location}}<br>
+            <span style="color: gray;">{{schedule.arrival.time | date:'short'}}</span>
+          </td>
+        </ng-container>
 
+        <ng-container matColumnDef="lastLocation">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Last Location </th>
+          <td mat-cell *matCellDef="let schedule">
+            {{schedule.lastLocation.location}}<br>
+            <span style="color: gray;">Last Updated: {{schedule.lastLocation.lastUpdated | date:'short'}}</span>
+          </td>
+        </ng-container>
 
+        <ng-container matColumnDef="freight">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Freight </th>
+          <td mat-cell *matCellDef="let schedule"> 
+            <ng-container *ngIf="schedule.freight.length > 0; else noFreight">
+              {{schedule.freight.join(', ')}}
+            </ng-container>
+            <ng-template #noFreight>No Cargo</ng-template>
+          </td>
+        </ng-container>
 
-    <ng-container matColumnDef="info">
-      <th mat-header-cell *matHeaderCellDef> details </th>
-      <td mat-cell *matCellDef="let schedule" class="info-column">
-        <button mat-icon-button (click)="showMoreInfo(schedule)">
-          <mat-icon style="color: green;">keyboard_arrow_right</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-  </table>
-</div>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Status </th>
+          <td mat-cell *matCellDef="let schedule"> {{schedule.status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="info">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Details </th>
+          <td mat-cell *matCellDef="let schedule" class="info-column">
+            <button mat-icon-button (click)="showMoreInfo(schedule)">
+              <mat-icon style="color: green;">keyboard_arrow_right</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" [ngClass]="{'hide-header': isWidget}"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   `,
-  styleUrl: './activity-table.component.css'
+  styleUrls: ['./activity-table.component.css']
 })
 export class ActivityTableComponent implements AfterViewInit {
-  displayedColumns = ['trainId', 'departure', 'arrival','lastLocation', 'freight','status','info'];
+  @Input() isWidget: boolean = false;
+  @Input() size: string = "500px";
+  displayedColumns = ['trainId', 'departure', 'arrival', 'lastLocation', 'freight', 'status', 'info'];
   dataSource = new MatTableDataSource(SCHEDULE_DATA);
   @ViewChild(MatSort) sort!: MatSort;
-  originalData: TrainSchedule[] = [...SCHEDULE_DATA];  // Make a copy of the original data
 
   constructor(private router: Router) {
     this.dataSource.filterPredicate = (data: TrainSchedule, filter: string) => {
@@ -105,36 +95,28 @@ export class ActivityTableComponent implements AfterViewInit {
     };
   }
 
-  ngAfterViewInit(){
-    this.dataSource.sort=this.sort;
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    if(this.isWidget){
+      this.displayedColumns = [
+        ...this.displayedColumns.slice(0, 3),
+        ...this.displayedColumns.slice(4)
+      ];
+    }
   }
+
   applyFilter(event: Event) {
     const input = event.target as HTMLInputElement;
     const filterValue = input.value.trim().toLowerCase();
-    this.dataSource.filter = filterValue; // This will trigger the filterPredicate
+    this.dataSource.filter = filterValue;
   }
-  
+
   showMoreInfo(schedule: TrainSchedule) {
     console.log(schedule.trainId);
-    this.router.navigate(['/train-details',schedule.trainId]);
+    this.router.navigate(['/train-details', schedule.trainId]);
   }
-  //might moove to a service--------------------------------------------
-
-  search(term: string): TrainSchedule[] {
-    return this.dataSource.data.filter(schedule => {
-      const lowerCaseTerm = term.toLowerCase();
-      return (
-        schedule.trainId.toLowerCase().includes(lowerCaseTerm) ||
-        schedule.departure.location.toLowerCase().includes(lowerCaseTerm) ||
-        schedule.arrival.location.toLowerCase().includes(lowerCaseTerm) ||
-        schedule.lastLocation.location.toLowerCase().includes(lowerCaseTerm) ||
-        schedule.freight.some(freightItem => freightItem.toLowerCase().includes(lowerCaseTerm)) ||
-        schedule.status.toLowerCase().includes(lowerCaseTerm)
-      );
-    });
-  }
-  //-------------------------------------------------------------------
 }
+
 
 export interface TrainSchedule {
   trainId: string;

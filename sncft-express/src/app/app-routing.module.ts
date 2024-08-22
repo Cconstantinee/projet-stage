@@ -8,6 +8,7 @@ import { MapComponent } from './pages/map/map.component';
 import { FreightComponent } from './pages/freight/freight.component';
 import { OperationInfoComponent } from './components/operation-info/operation-info.component';
 import { TrainInfoComponent } from './components/train-info/train-info.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent,title:'home'},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'map',component:MapComponent,title:'map'},
   {path:'freight',component:FreightComponent,title:'freight'},
   {path:'op-details/:OpId',component:OperationInfoComponent,title:'operation'},
-  {path:'train-details/:trainId',component:TrainInfoComponent,title:'train'}
+  {path:'train-details/:trainId',component:TrainInfoComponent,title:'train'},
+  {path:'login',component:LoginComponent,title:'login'}
   ];
 
 @NgModule({

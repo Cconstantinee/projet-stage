@@ -35,7 +35,8 @@ import { TrainInfoComponent } from './components/train-info/train-info.component
 import {MatGridListModule} from '@angular/material/grid-list';
 import { WidgetComponent } from './components/widget/widget.component';
 import {MatCardModule} from '@angular/material/card';
-import { InteractiveMap1Component } from './components/interactive-map-1/interactive-map-1.component'; 
+import { InteractiveMap1Component } from './components/interactive-map-1/interactive-map-1.component';
+import { LoginComponent } from './pages/login/login.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { InteractiveMap1Component } from './components/interactive-map-1/interac
     OperationInfoComponent,
     TrainInfoComponent,
     WidgetComponent,
-    InteractiveMap1Component
+    InteractiveMap1Component,
+    LoginComponent
     
     
     

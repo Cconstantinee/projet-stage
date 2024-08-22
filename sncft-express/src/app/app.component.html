@@ -1,5 +1,5 @@
 <app-angular-toolbar></app-angular-toolbar>
-<mat-tab-group (selectedTabChange)="onTabChange($event)" [(selectedIndex)]="selectedTabIndex" *ngIf="currentRoute !== '/'">
+<mat-tab-group (selectedTabChange)="onTabChange($event)" [(selectedIndex)]="selectedTabIndex" *ngIf="currentRoute !== '/'&&currentRoute!=='/login'">
   <mat-tab label="Dashboard"></mat-tab>
   <mat-tab label="Operations"></mat-tab>
   <mat-tab label="Fleet"></mat-tab>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-interactive-map-1',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './interactive-map-1.component.css'
 })
 export class InteractiveMap1Component {
-
+  @Input() isWidget:boolean=false;
 }

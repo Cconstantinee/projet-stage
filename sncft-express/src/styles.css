@@ -14,3 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .no-scrollbar::-webkit-scrollbar {
     display: none; /* Hide scrollbar in Chrome, Safari */
   }
+
+  .custom-spacer{
+    flex: 1 1 auto;
+  }

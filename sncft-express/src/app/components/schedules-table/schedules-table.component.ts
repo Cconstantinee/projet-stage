@@ -3,7 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { OperationsService } from '../../services/operations.service';
-
+import { Operation } from '../../services/operations';
 @Component({
   selector: 'app-schedules-table',
   template: `
@@ -22,15 +22,15 @@ import { OperationsService } from '../../services/operations.service';
     <!-- Position Column -->
     <ng-container matColumnDef="OpId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Op Id. </th>
-      <td mat-cell *matCellDef="let schedule"> {{schedule.OpId}} </td>
+      <td mat-cell *matCellDef="let schedule"> {{schedule.operationId}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="departure">
       <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Departure </th>
       <td mat-cell *matCellDef="let schedule">
-      {{schedule.departure_location}}<br>
-    <span style="color: gray;">{{schedule.departure_time | date:'short'}}</span>
+      {{schedule.departure.location}}<br>
+    <span style="color: gray;">{{schedule.departure.time | date:'short'}}</span>
   </td>
     </ng-container>
 
@@ -38,8 +38,8 @@ import { OperationsService } from '../../services/operations.service';
     <ng-container matColumnDef="arrival">
       <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> Arrival </th>
       <td mat-cell *matCellDef="let schedule">
-      {{schedule.arrival_location}}<br>
-    <span style="color: gray;">{{schedule.arrival_time | date:'short'}}</span>
+      {{schedule.arrival.location}}<br>
+    <span style="color: gray;">{{schedule.arrival.time | date:'short'}}</span>
   </td>
     </ng-container>
 
@@ -70,30 +70,18 @@ import { OperationsService } from '../../services/operations.service';
   `,
   styleUrl: './schedules-table.component.css'
 })
-export class SchedulesTableComponent implements AfterViewInit {
-  @Input() isWidget: boolean = false;
+export class SchedulesTableComponent implements AfterViewInit {@Input() isWidget: boolean = false;
   @Input() size: string = "500px";
-  displayedColumns = ['OpId','departure', 'arrival', 'freight', 'status', 'info'];
-  dataSource = new MatTableDataSource<SchedulesTable>([]); // Initialize with empty array
+  displayedColumns = ['OpId', 'departure', 'arrival', 'freight', 'status', 'info'];
+  dataSource = new MatTableDataSource<Operation>([]);
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private router: Router, private operationsService: OperationsService) {}
 
   ngAfterViewInit() {
     this.operationsService.getAllOperations().subscribe(
-      (res: any) => {
-        // Map the response data to SchedulesTable format
-        const mappedData: SchedulesTable[] = res.map((item: any) => ({
-          OpId: item.operation_id,
-          departure_location: item.schedule.departure_location,
-          departure_time: new Date(item.schedule.departure_time),
-          arrival_location: item.schedule.arrival_location,
-          arrival_time: new Date(item.schedule.arrival_time),
-          freight: item.freight.map((f: any) => f.freight_type), // Collect freight types into an array
-          status: item.status
-        }));
-        
-        this.dataSource.data = mappedData;
+      (res: Operation[]) => {
+        this.dataSource.data = res; // Directly assign the response data
         this.dataSource.sort = this.sort; // Set the sort after data is assigned
       },
       error => {
@@ -108,22 +96,13 @@ export class SchedulesTableComponent implements AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  showMoreInfo(schedule: SchedulesTable) {
-    console.log(schedule.OpId);
-    this.router.navigate(['/op-details', schedule.OpId]);
+  showMoreInfo(schedule: Operation) {
+    console.log(schedule.operationId);
+    this.router.navigate(['/op-details', schedule.operationId]);
   }
 }
 
-export interface SchedulesTable {
-  OpId:number;
-  departure_location:string;
-  departure_time:Date;
-  arrival_location:string;
-  arrival_time:Date;
-  freight:String[];
-  status:string;
 
-}
 
 
 

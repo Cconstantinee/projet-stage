@@ -37,6 +37,7 @@ import { WidgetComponent } from './components/widget/widget.component';
 import {MatCardModule} from '@angular/material/card';
 import { InteractiveMap1Component } from './components/interactive-map-1/interactive-map-1.component';
 import { LoginComponent } from './pages/login/login.component'; 
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,8 @@ import { LoginComponent } from './pages/login/login.component';
     MatDatepickerModule,
     FilterTableComponent,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
 ],
   providers: [
     provideAnimationsAsync()

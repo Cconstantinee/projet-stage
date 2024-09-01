@@ -1,0 +1,19 @@
+
+div{
+    height: 75vh;
+    
+}
+
+#cargo-list{
+
+    background-color:red;
+}
+
+#cargo-info{
+    background-color: aquamarine;
+}
+
+#cargo-order{
+    background-color: blueviolet;
+}
+

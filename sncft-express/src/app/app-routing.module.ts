@@ -9,6 +9,7 @@ import { FreightComponent } from './pages/freight/freight.component';
 import { OperationInfoComponent } from './components/operation-info/operation-info.component';
 import { TrainInfoComponent } from './components/train-info/train-info.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RigInfoComponent } from './components/rig-info/rig-info.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent,title:'home'},
@@ -19,7 +20,15 @@ const routes: Routes = [
   {path:'freight',component:FreightComponent,title:'freight'},
   {path:'op-details/:OpId',component:OperationInfoComponent,title:'operation'},
   {path:'train-details/:trainId',component:TrainInfoComponent,title:'train'},
-  {path:'login',component:LoginComponent,title:'login'}
+  {path:'login',component:LoginComponent,title:'login'},
+  
+  {path: 'fleet',component: FleetComponent,children: [{
+        path: ':rigId',
+        component: RigInfoComponent,
+        outlet: 'rigInfo' // Named outlet
+      }
+    ]
+  }
   ];
 
 @NgModule({

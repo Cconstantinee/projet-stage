@@ -19,4 +19,29 @@
     /* Hide the header cell */
     display: none;
   }
+
+  .status-on-route {
+    color: teal; /* Example color */
+  }
+  
+  .status-delayed {
+    color: crimson; /* Example color */
+  }
+  
+  .status-stopped {
+    color: gray; /* Example color */
+  }
+  
+  .status-arrived {
+    color: green; /* Example color */
+  }
+  
+  .status-pending {
+    color: goldenrod; /* Example color */
+  }
+
+  .status-cell {
+    
+  }
+  
  

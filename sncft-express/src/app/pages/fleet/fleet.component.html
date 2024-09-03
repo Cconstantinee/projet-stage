@@ -1,1 +1,15 @@
 <p>fleet works!</p>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3" style="height: 650px;overflow-y: scroll;">
+            <div *ngFor="let rig of fleetTable">
+				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [rig_status]="rig.rig_status" [maintenance_status]="rig.maintenance_status"></app-data-widget>
+			</div>
+		</div>
+		<div class="col-md-9">
+			hello
+            <router-outlet name="rigInfo"></router-outlet>
+		</div>
+	</div>
+</div>

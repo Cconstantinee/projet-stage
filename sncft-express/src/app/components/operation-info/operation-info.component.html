@@ -6,9 +6,20 @@
                 Back to Operations Screen
             </button>
             <mat-divider></mat-divider>
-
         </div>
         <div class="col col-10"></div>
     </div>
-    <p>operation-info works!</p> {{operationId}}
+
+    <!-- Show spinner while loading -->
+    <div *ngIf="isLoading" class="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- Show content once loaded -->
+    <div *ngIf="!isLoading">
+        <p>Operation ID: {{ operationId }}</p>
+        <p>Operation Details:</p>
+        <pre>{{ operationData | json }}</pre>
+    </div>
 </div>
+

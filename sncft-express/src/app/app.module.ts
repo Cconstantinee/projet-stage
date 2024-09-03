@@ -38,6 +38,12 @@ import {MatCardModule} from '@angular/material/card';
 import { InteractiveMap1Component } from './components/interactive-map-1/interactive-map-1.component';
 import { LoginComponent } from './pages/login/login.component'; 
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DataWidgetComponent } from './components/data-widget/data-widget.component'; 
+import {MatRippleModule} from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
+import { RigInfoComponent } from './components/rig-info/rig-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +60,9 @@ import { HttpClientModule } from '@angular/common/http';
     TrainInfoComponent,
     WidgetComponent,
     InteractiveMap1Component,
-    LoginComponent
+    LoginComponent,
+    DataWidgetComponent,
+    RigInfoComponent
     
     
     
@@ -81,7 +89,11 @@ import { HttpClientModule } from '@angular/common/http';
     FilterTableComponent,
     MatGridListModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatChipsModule
 ],
   providers: [
     provideAnimationsAsync()

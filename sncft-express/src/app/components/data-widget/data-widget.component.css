@@ -1,0 +1,64 @@
+.spaced-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ship-icon {
+    display: inline-block;
+    border-radius: 12px;
+    padding: 6px;
+  }
+
+.rig-in-storage {
+  color:gray;
+}
+/* Rig status styles */
+.rig-online {
+  color: green;
+}
+
+.rig-offline {
+  
+  color: red;
+}
+
+.rig-standby {
+   /* Orange */
+  color: orange;
+}
+
+.rig-default {
+   /* Light gray */
+  color: gray;
+}
+
+/* Maintenance status styles */
+.maintenance-good {
+  background-color: lightgreen; /* Green */
+  color: white;
+}
+
+.maintenance-moderate {
+  background-color: green; /* Yellow */
+  color: white;
+}
+
+.maintenance-attention {
+  background-color: orange; /* Orange */
+  color: white;
+}
+
+.maintenance-critical {
+  background-color: red; /* Red */
+  color: white;
+}
+
+.maintenance-in-maintenance {
+  background-color: midnightblue; /* Blue */
+  color: white;
+}
+
+.maintenance-default {
+  background-color: #e0e0e0; /* Light gray */
+  color: gray;
+}

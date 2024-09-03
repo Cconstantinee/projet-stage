@@ -15,6 +15,7 @@ import { Operation } from '../../services/operations';
     <mat-icon>search</mat-icon>
   </button>
 </mat-form-field>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
   <div class="example-container" [style.height]="size" [ngClass]="{'no-scrollbar': isWidget}">
     
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -45,14 +46,29 @@ import { Operation } from '../../services/operations';
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="freight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Freight </th>
-      <td mat-cell *matCellDef="let schedule"> {{schedule.freight}} </td>
-    </ng-container>
+  <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Freight </th>
+  <td mat-cell *matCellDef="let schedule">
+    <span *ngIf="schedule.freight && schedule.freight.length > 0; else emptyText">
+      {{ schedule.freight }}
+    </span>
+    <ng-template #emptyText>
+      <span style="color: gray;">-no freight-</span>
+    </ng-template>
+  </td>
+</ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Status </th>
-      <td mat-cell *matCellDef="let schedule"> {{schedule.status}} </td>
-    </ng-container>
+
+<ng-container matColumnDef="status">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide-header': isWidget}"> Status </th>
+  <td mat-cell *matCellDef="let schedule">
+    <div class="status-cell" [ngClass]="getStatusClass(schedule.status)">
+      {{ schedule.status }}
+    </div>
+  </td>
+</ng-container>
+
+
+
 
     <ng-container matColumnDef="info">
       <th mat-header-cell *matHeaderCellDef [ngClass]="{'hide-header': isWidget}"> details </th>
@@ -70,11 +86,14 @@ import { Operation } from '../../services/operations';
   `,
   styleUrl: './schedules-table.component.css'
 })
-export class SchedulesTableComponent implements AfterViewInit {@Input() isWidget: boolean = false;
+export class SchedulesTableComponent implements AfterViewInit {
+  @Input() isWidget: boolean = false;
   @Input() size: string = "500px";
   displayedColumns = ['OpId', 'departure', 'arrival', 'freight', 'status', 'info'];
   dataSource = new MatTableDataSource<Operation>([]);
   @ViewChild(MatSort) sort!: MatSort;
+
+  isLoading: boolean = true; // Add this flag for loading state
 
   constructor(private router: Router, private operationsService: OperationsService) {}
 
@@ -83,9 +102,11 @@ export class SchedulesTableComponent implements AfterViewInit {@Input() isWidget
       (res: Operation[]) => {
         this.dataSource.data = res; // Directly assign the response data
         this.dataSource.sort = this.sort; // Set the sort after data is assigned
+        this.isLoading = false; // Data loaded, stop showing the progress bar
       },
       error => {
         console.error('Error fetching operations:', error);
+        this.isLoading = false; // Stop loading even if there’s an error
       }
     );
   }
@@ -100,6 +121,24 @@ export class SchedulesTableComponent implements AfterViewInit {@Input() isWidget
     console.log(schedule.operationId);
     this.router.navigate(['/op-details', schedule.operationId]);
   }
+
+  getStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'on route':
+        return 'status-on-route';
+      case 'delayed':
+        return 'status-delayed';
+      case 'stopped':
+        return 'status-stopped';
+      case 'arrived':
+        return 'status-arrived';
+      case 'pending':
+        return 'status-pending';
+      default:
+        return '';
+    }
+  }
+  
 }
 
 

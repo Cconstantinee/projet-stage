@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Warning</h2>
+<mat-dialog-content>
+  <p>The following operation with the id {{id}} will be deleted, do you want to proceed?</p>
+  <mat-form-field>
+    <mat-label>Type yes to continue</mat-label>
+    <input matInput [(ngModel)]="confirm" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button (click)="confirmed()" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>
+
+

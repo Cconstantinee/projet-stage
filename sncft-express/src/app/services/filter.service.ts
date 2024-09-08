@@ -19,8 +19,11 @@ export class FilterService {
       // Check if 'date' key should be used
       if (formData.date && !isTimeRangeOn) {
         
-        queryParams.append('date', new Date(formData.date).toISOString());
-        console.log('time range on?:',isTimeRangeOn);
+        const dateOnly = formData.date; 
+        const isoDate = new Date(Date.UTC(dateOnly.getFullYear(), dateOnly.getMonth(), dateOnly.getDate())).toISOString();
+        queryParams.append('date', isoDate);
+
+        console.log(formData.date,'--->',isoDate);
       } else if (isTimeRangeOn && formData.date_range) {
         // Convert and append date range parameters
         if (formData.date_range.start) {

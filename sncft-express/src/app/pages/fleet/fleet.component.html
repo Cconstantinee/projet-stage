@@ -12,7 +12,8 @@
     'overflow-y': 'scroll'
   }"
   class="col-12">
-
+      <div *ngIf="isLoading"><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
       <div *ngFor="let rig of fleetTable">
 				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [rig_status]="rig.rig_status" [maintenance_status]="rig.maintenance_status" *ngIf="isWidget==false"></app-data-widget>
 				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [maintenance_status]="rig.maintenance_status" [isWidget]="true" *ngIf="isWidget==true && isMaintenanceStatusIncluded(rig.maintenance_status)"></app-data-widget>

@@ -1,22 +1,23 @@
-import { Component ,inject, OnInit} from '@angular/core';
+import { Component ,inject, model, OnInit, signal} from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
 import { OperationsService } from '../../services/operations.service';
 import { OperationDetail } from '../../services/operations';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 @Component({
   selector: 'app-operation-info',
   templateUrl: './operation-info.component.html',
   styleUrl: './operation-info.component.css'
 })
 export class OperationInfoComponent implements OnInit{
-dropOperation() {
-throw new Error('Method not implemented.');
-}
+
+
   reoute:ActivatedRoute=inject(ActivatedRoute);
   operationId=0;
   operationDetail!:OperationDetail;
   isLoading:boolean =true;
 
-  constructor(private router:Router, private operationsService:OperationsService){
+  constructor(private router:Router, private operationsService:OperationsService, public dialog: MatDialog){
     this.operationId=Number(this.reoute.snapshot.params["OpId"]);
   }
   navigateToOperations() {
@@ -39,5 +40,16 @@ throw new Error('Method not implemented.');
     const date = new Date(dateStr);
     return date.toLocaleString();
   }
+
+  dropOperation(id:number) {
+    this.dialog.open(DialogBoxComponent, {
+      width: '500px',
+      data: {id:id}  // You can pass data to the dialog if needed
+    });
+    }
+
+ 
+
+  
 }
 

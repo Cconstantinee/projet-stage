@@ -35,6 +35,7 @@ handleEvent(event: any) {
   }
   ngOnInit(): void {
     this.selectedValue = this.storageService.getItem('active_operations_tab');
+    this.scheduleTableComponent.ngOnInit();
   }
   updateLocalStorage() {
     this.storageService.setItem('active_operations_tab', this.selectedValue);

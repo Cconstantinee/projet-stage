@@ -7,6 +7,7 @@ import { fleet } from '../../services/fleet';
   styleUrl: './fleet.component.css'
 })
 export class FleetComponent implements OnInit{
+  isLoading:boolean=true;
   @Input() isWidget:boolean=false;
   maintenanceStatusTable: string[] = ['needs attention','critical'];
   constructor(private fleetService:FleetService){}
@@ -15,6 +16,7 @@ export class FleetComponent implements OnInit{
     this.fleetService.getHoleFleet().subscribe(
       (res)=>{
         this.fleetTable=res;
+        this.isLoading=false;
       }
     );
   }

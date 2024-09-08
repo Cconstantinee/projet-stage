@@ -41,6 +41,13 @@ export class OperationsService {
     );
   }
 
+  deleteOperation(id?:number):Observable<any>{
+    if(id){
+      return this.httpClient.delete(`${this.REST_API}/${id}`);
+    }
+    return throwError('id type missmatch');
+  }
+
   // Error handling
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

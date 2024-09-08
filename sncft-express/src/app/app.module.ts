@@ -44,6 +44,9 @@ import { DataWidgetComponent } from './components/data-widget/data-widget.compon
 import {MatRippleModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import { RigInfoComponent } from './components/rig-info/rig-info.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,8 @@ import { RigInfoComponent } from './components/rig-info/rig-info.component';
     InteractiveMap1Component,
     LoginComponent,
     DataWidgetComponent,
-    RigInfoComponent
+    RigInfoComponent,
+    DialogBoxComponent
     
     
     
@@ -93,7 +97,9 @@ import { RigInfoComponent } from './components/rig-info/rig-info.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRippleModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatSnackBarModule
 ],
   providers: [
     provideAnimationsAsync()

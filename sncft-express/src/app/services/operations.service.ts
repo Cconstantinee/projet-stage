@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Operation } from './operations';
+import { Operation, OperationDetail } from './operations';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class OperationsService {
 
-  private cachedOperations: Operation[] | null = null; // Cache for all operations
-  private operationCache: Map<number, Operation> = new Map(); // Cache for individual operations
+  public cachedOperations: Operation[] | null = null; // Cache for all operations
+  private operationCache: Map<number, OperationDetail> = new Map(); // Cache for individual operations
 
   REST_API: string = 'http://localhost:8082/api/operations';
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
@@ -29,14 +29,14 @@ export class OperationsService {
   }
 
   // Get a single operation by ID
-  getOperation(id: number): Observable<Operation> { 
+  getOperation(id: number): Observable<OperationDetail> { 
     if (this.operationCache.has(id)) {
       return of(this.operationCache.get(id)!); // Return cached data
     }
     let API_URL = `${this.REST_API}/${id}`;
-    return this.httpClient.get<Operation>(API_URL).pipe(
-      tap((res: Operation) => this.operationCache.set(id, res)), // Cache the data
-      map((res: Operation) => res || {} as Operation),
+    return this.httpClient.get<OperationDetail>(API_URL).pipe(
+      tap((res: OperationDetail) => this.operationCache.set(id, res)), // Cache the data
+      map((res: OperationDetail) => res || {} as OperationDetail),
       catchError(this.handleError)
     );
   }

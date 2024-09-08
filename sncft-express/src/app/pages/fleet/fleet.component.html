@@ -1,13 +1,26 @@
-<p>fleet works!</p>
+
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3" style="height: 650px;overflow-y: scroll;">
+		<div 
+  [ngClass]="{
+    'col-md-3': !isWidget,
+    'no-scrollbar': isWidget
+  }"
+  [ngStyle]="{
+    'height': isWidget ? '225px' : '650px',
+    'overflow-y': 'scroll'
+  }"
+  class="col-12">
+
             <div *ngFor="let rig of fleetTable">
-				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [rig_status]="rig.rig_status" [maintenance_status]="rig.maintenance_status"></app-data-widget>
+				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [rig_status]="rig.rig_status" [maintenance_status]="rig.maintenance_status" *ngIf="isWidget==false"></app-data-widget>
+				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [maintenance_status]="rig.maintenance_status" [isWidget]="true" *ngIf="isWidget==true && isMaintenanceStatusIncluded(rig.maintenance_status)"></app-data-widget>
 			</div>
+			
 		</div>
-		<div class="col-md-9">
+		<mat-divider style="position: sticky;"></mat-divider>
+		<div class="col-md-9" *ngIf="!isWidget">
 			hello
             <router-outlet name="rigInfo"></router-outlet>
 		</div>

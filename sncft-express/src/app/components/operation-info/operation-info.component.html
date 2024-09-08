@@ -1,10 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid no-scrollbar" style="overflow-y: scroll;height: 85vh;">
     <div class="row my-2">
         <div class="col col-2">
-            <button mat-button color="primary" style="display: block; width: 100%;" class="text-start" (click)="navigateToOperations()">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-                Back to Operations Screen
-            </button>
+            <button (click)="navigateToOperations()">Back to Operations</button>
             <mat-divider></mat-divider>
         </div>
         <div class="col col-10"></div>
@@ -17,9 +14,70 @@
 
     <!-- Show content once loaded -->
     <div *ngIf="!isLoading">
-        <p>Operation ID: {{ operationId }}</p>
-        <p>Operation Details:</p>
-        <pre>{{ operationData | json }}</pre>
+        <div *ngIf="isLoading" class="loading">
+            <mat-spinner></mat-spinner> <!-- Angular Material spinner for loading state -->
+          </div>
+          
+          <div *ngIf="!isLoading" >
+            <!-- Operation Details, Schedule, and Train Sections in a Row -->
+            <div class="info-row">
+              <div class="section operation-details">
+                <h2>Operation Details</h2>
+                <p><strong>Operation ID:</strong> {{ operationDetail.operation_id }}</p>
+                <p><strong>Status:</strong> {{ operationDetail.status }}</p>
+              </div>
+              <div class="section schedule">
+                <h2>Schedule</h2>
+                <p><strong>Departure Location:</strong> {{ operationDetail.schedule.departure_location }}</p>
+                <p><strong>Departure Time:</strong> {{ formatDate(operationDetail.schedule.departure_time) }}</p>
+                <p><strong>Arrival Location:</strong> {{ operationDetail.schedule.arrival_location }}</p>
+                <p><strong>Arrival Time:</strong> {{ formatDate(operationDetail.schedule.arrival_time) }}</p>
+              </div>
+              <div class="section train">
+                <h2>Train</h2>
+                <p><strong>Train ID:</strong> {{ operationDetail.train.train_id }}</p>
+                <p><strong>Train Operator:</strong> {{ operationDetail.train.train_operator }}</p>
+                <p><strong>Locomotive ID:</strong> {{ operationDetail.train.locomotive_id }}</p>
+              </div>
+            </div>
+          
+            <hr>
+          
+            <!-- Freight Section -->
+            <div class="section freight-section  no-scrollbar" style="overflow-x: scroll;">
+                <h2>Freight</h2>
+                <div class="freight-container">
+                  <div *ngFor="let item of operationDetail.freight" class="freight-item">
+                    <p><strong>Freight Type:</strong> {{ item.freight_type }}</p>
+                    <p><strong>Total Units:</strong> {{ item.total_units }}</p>
+                    <p><strong>Total Weight:</strong> {{ item.total_weight }} kg</p>
+                    <p><strong>Total Value:</strong> {{ item.total_value }} USD</p>
+                    <p><strong>Wagon ID:</strong> {{ item.wagon_id }}</p>
+                  </div>
+                </div>
+              </div>
+              
+          
+            <hr>
+          
+            <!-- Route Section -->
+            <div class="section route-section no-scrollbar" style="overflow-x: scroll;">
+              <h2>Route</h2>
+              <div class="route-container">
+                <div *ngFor="let stop of operationDetail.route" class="route-stop">
+                  <div class="route-stop-details">
+                    <p><strong>Location:</strong> {{ stop.location }}</p>
+                    <p><strong>Arrival Time:</strong> {{ formatDate(stop.arrival_time) }}</p>
+                    <p><strong>Elapsed Time:</strong> {{ stop.elapsed_time }} hours</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            
+          </div>
+          
+          
     </div>
 </div>
 

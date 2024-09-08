@@ -1,4 +1,4 @@
-import { Component,AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component,AfterViewInit, ViewChild, Input, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -86,27 +86,30 @@ import { Operation } from '../../services/operations';
   `,
   styleUrl: './schedules-table.component.css'
 })
-export class SchedulesTableComponent implements AfterViewInit {
+export class SchedulesTableComponent implements OnInit {
   @Input() isWidget: boolean = false;
   @Input() size: string = "500px";
   displayedColumns = ['OpId', 'departure', 'arrival', 'freight', 'status', 'info'];
   dataSource = new MatTableDataSource<Operation>([]);
   @ViewChild(MatSort) sort!: MatSort;
 
-  isLoading: boolean = true; // Add this flag for loading state
+  isLoading: boolean = true;
 
-  constructor(private router: Router, private operationsService: OperationsService) {}
+  constructor(
+    private router: Router, 
+    private operationsService: OperationsService
+  ) {}
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.operationsService.getAllOperations().subscribe(
       (res: Operation[]) => {
-        this.dataSource.data = res; // Directly assign the response data
-        this.dataSource.sort = this.sort; // Set the sort after data is assigned
-        this.isLoading = false; // Data loaded, stop showing the progress bar
+        this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
+        this.isLoading = false;
       },
       error => {
         console.error('Error fetching operations:', error);
-        this.isLoading = false; // Stop loading even if there’s an error
+        this.isLoading = false;
       }
     );
   }
@@ -138,7 +141,6 @@ export class SchedulesTableComponent implements AfterViewInit {
         return '';
     }
   }
-  
 }
 
 

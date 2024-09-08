@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
       <mat-card-content>
         <div class="spaced-header">
         
-        <span class="ship-icon" [ngClass]="getRigStatusClass()">{{rig_status}}</span><span class="m-2 ship-icon" [ngClass]="getMaintenanceStatusClass()">{{maintenance_status}}</span>
+        <span class="ship-icon" [ngClass]="getRigStatusClass()" *ngIf="!isWidget">{{rig_status}}</span><span class="m-2 ship-icon" [ngClass]="getMaintenanceStatusClass()">{{maintenance_status}}</span>
 
         </div>
       </mat-card-content>
@@ -37,6 +37,7 @@ export class DataWidgetComponent{
   @Input() id:string="N/A";
   @Input() rig_status:string="-no data-";
   @Input() maintenance_status:string="-no data-"
+  @Input() isWidget:boolean=false;
   constructor(private router: Router) {}
 
   getRigStatusClass(): string {

@@ -1,7 +1,7 @@
 import { Component ,inject, OnInit} from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
 import { OperationsService } from '../../services/operations.service';
-import { Operation } from '../../services/operations';
+import { OperationDetail } from '../../services/operations';
 @Component({
   selector: 'app-operation-info',
   templateUrl: './operation-info.component.html',
@@ -10,7 +10,7 @@ import { Operation } from '../../services/operations';
 export class OperationInfoComponent implements OnInit{
   reoute:ActivatedRoute=inject(ActivatedRoute);
   operationId=0;
-  operationData!:Operation;
+  operationDetail!:OperationDetail;
   isLoading:boolean =true;
 
   constructor(private router:Router, private operationsService:OperationsService){
@@ -20,9 +20,9 @@ export class OperationInfoComponent implements OnInit{
     this.router.navigate(['/operations']);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.operationsService.getOperation(this.operationId).subscribe((res)=>{
-      this.operationData=res;
+      this.operationDetail=res;
       this.isLoading=false;
     },
     (error) => {
@@ -32,4 +32,9 @@ export class OperationInfoComponent implements OnInit{
       
     )
   }
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleString();
+  }
 }
+

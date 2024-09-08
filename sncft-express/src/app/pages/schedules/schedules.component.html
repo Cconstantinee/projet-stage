@@ -4,17 +4,20 @@
         
         <div class="col-2 py-2">
             <div class="py-2">
-                <div class="p-2">
-                    <mat-slide-toggle>Real-time tracking</mat-slide-toggle>
+                <!--may come back to it-->
+                <div *ngIf="false">
+                    <div class="p-2">
+                        <mat-slide-toggle>Real-time tracking</mat-slide-toggle>
+                    </div>
+                    <mat-divider></mat-divider><br>
                 </div>
-                <mat-divider></mat-divider><br>
                 <mat-accordion >
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                           <mat-panel-title><mat-icon>filter_list</mat-icon><span> Filters </span></mat-panel-title>  
                         </mat-expansion-panel-header>
                         <!--filter selects-->
-                        <app-filter-table></app-filter-table> 
+                        <app-filter-table (updateTable)="handleEvent($event)"></app-filter-table> 
                       </mat-expansion-panel>
                 </mat-accordion>
             </div>
@@ -26,7 +29,7 @@
                     <mat-button-toggle value="schedulesTable">Shipment tracker</mat-button-toggle>
                 </mat-button-toggle-group>
                     
-                <app-schedules-table *ngIf="selectedValue==='schedulesTable'"></app-schedules-table>
+                <app-schedules-table *ngIf="selectedValue==='schedulesTable'" #scheduleTable></app-schedules-table>
                 <app-activity-table *ngIf="selectedValue==='trackerTable'"></app-activity-table>
             </div>
         </div>

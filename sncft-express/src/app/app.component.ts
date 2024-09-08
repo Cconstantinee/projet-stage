@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { StorageServiceService } from './services/storage-service.service';
+import { LocationsService } from './services/locations.service';
+import { FreightService } from './services/freight.service';
+import { FleetService } from './services/fleet.service';
 
 
 @Component({
@@ -14,7 +17,9 @@ export class AppComponent {
   selectedTabIndex = 0;
   title = 'sncft-express';
   currentRoute: string | undefined;
-  constructor(private router:Router,private activatedRoute: ActivatedRoute, private storageService:StorageServiceService){
+  constructor(private router:Router,private activatedRoute: ActivatedRoute, private storageService:StorageServiceService,private locationsService:LocationsService,
+    private freightService:FreightService,private fleetService:FleetService
+  ){
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     })
@@ -45,8 +50,18 @@ export class AppComponent {
         }
       });
       this.storageService.setItem('active_operations_tab', 'trackerTable');
+      this.locationsService.getLocations().subscribe(
+        ()=>{console.log('locations ready')}
+      );
+      this.freightService.getFreightTypes().subscribe(
+        ()=>{console.log('freight ready')}
+      );
+      this.fleetService.getHoleFleet().subscribe(
+        ()=>{console.log('fleet ready')}
+      );
+      
     }
-  
+    
     updateSelectedTab(url: string): void {
       if (url.includes('/dashboard')) {
         this.selectedTabIndex = 0;

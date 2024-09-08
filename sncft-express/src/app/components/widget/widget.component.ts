@@ -17,7 +17,7 @@ import { Component,Input, OnInit } from '@angular/core';
         </mat-card-title>
         <a mat-icon-button [routerLink]="'/'+widget_selector"
    (mouseover)="iconColor = 'green'" 
-   (mouseout)="iconColor = 'lightgray'" *ngIf="[3, 4, 5,6].includes(widget_index)">
+   (mouseout)="iconColor = 'lightgray'" *ngIf="[-2,-1,3, 4, 5,6].includes(widget_index)">
   <mat-icon [style.color]="iconColor">open_in_new</mat-icon>
 </a>
       </mat-card-header>
@@ -28,6 +28,7 @@ import { Component,Input, OnInit } from '@angular/core';
         <app-schedules-table *ngSwitchCase="3" [isWidget]="true" size="140px"></app-schedules-table>
         <app-activity-table *ngSwitchCase="4" [isWidget]="true" size="140px"></app-activity-table>
         <app-interactive-map-1 *ngSwitchCase="6" [isWidget]="true"></app-interactive-map-1>
+        <app-fleet *ngSwitchCase="-1" [isWidget]="true"></app-fleet>
         <div *ngSwitchDefault></div>
       </div>
       </mat-card-content>

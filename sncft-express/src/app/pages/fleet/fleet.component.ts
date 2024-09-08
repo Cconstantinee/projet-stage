@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FleetService } from '../../services/fleet.service';
 import { fleet } from '../../services/fleet';
 @Component({
@@ -7,8 +7,8 @@ import { fleet } from '../../services/fleet';
   styleUrl: './fleet.component.css'
 })
 export class FleetComponent implements OnInit{
-
-
+  @Input() isWidget:boolean=false;
+  maintenanceStatusTable: string[] = ['needs attention','critical'];
   constructor(private fleetService:FleetService){}
   fleetTable:fleet[]=[];
   ngOnInit(): void {
@@ -27,5 +27,8 @@ export class FleetComponent implements OnInit{
       convertedId="C"+id;
     }
     return convertedId;
+}
+isMaintenanceStatusIncluded(status: string): boolean {
+  return this.maintenanceStatusTable.includes(status);
 }
 }

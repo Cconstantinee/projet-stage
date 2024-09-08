@@ -1,6 +1,6 @@
 
 
-<div class="container-fluid">
+<div class="container-fluid py-2">
 	<div class="row">
 		<div 
   [ngClass]="{
@@ -8,21 +8,22 @@
     'no-scrollbar': isWidget
   }"
   [ngStyle]="{
-    'height': isWidget ? '225px' : '650px',
+    'height': isWidget ? '225px' : '84vh',
     'overflow-y': 'scroll'
   }"
   class="col-12">
 
-            <div *ngFor="let rig of fleetTable">
+      <div *ngFor="let rig of fleetTable">
 				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [rig_status]="rig.rig_status" [maintenance_status]="rig.maintenance_status" *ngIf="isWidget==false"></app-data-widget>
 				<app-data-widget [id]="convertID(rig.rig_id,rig.rig_type)" [maintenance_status]="rig.maintenance_status" [isWidget]="true" *ngIf="isWidget==true && isMaintenanceStatusIncluded(rig.maintenance_status)"></app-data-widget>
 			</div>
 			
 		</div>
-		<mat-divider style="position: sticky;"></mat-divider>
+		
 		<div class="col-md-9" *ngIf="!isWidget">
 			hello
             <router-outlet name="rigInfo"></router-outlet>
 		</div>
 	</div>
+  <mat-divider style="position: sticky;" *ngIf="isWidget"></mat-divider>
 </div>

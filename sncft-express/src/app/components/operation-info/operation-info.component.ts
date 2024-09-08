@@ -8,6 +8,9 @@ import { OperationDetail } from '../../services/operations';
   styleUrl: './operation-info.component.css'
 })
 export class OperationInfoComponent implements OnInit{
+dropOperation() {
+throw new Error('Method not implemented.');
+}
   reoute:ActivatedRoute=inject(ActivatedRoute);
   operationId=0;
   operationDetail!:OperationDetail;

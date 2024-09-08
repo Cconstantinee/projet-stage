@@ -92,8 +92,7 @@ hr {
 button {
   margin: 20px 0;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -124,6 +123,15 @@ button:hover {
   border-radius: 5px;
   min-width: 200px; /* Adjust width as needed */
 }
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
 
 
   

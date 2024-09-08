@@ -1,7 +1,8 @@
-<div class="container-fluid no-scrollbar" style="overflow-y: scroll;height: 85vh;">
+<div class="container-fluid" style="overflow-y: scroll;height: 85vh;">
     <div class="row my-2">
         <div class="col col-2">
-            <button (click)="navigateToOperations()">Back to Operations</button>
+            <button (click)="navigateToOperations()" class="btn btn-primary">Back to Operations</button>
+              
             <mat-divider></mat-divider>
         </div>
         <div class="col col-10"></div>
@@ -74,7 +75,7 @@
               </div>
             </div>
           
-            
+            <button (click)="dropOperation()" class="btn btn-danger">Drop operation</button> 
           </div>
           
           

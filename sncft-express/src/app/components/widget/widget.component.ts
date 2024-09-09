@@ -29,6 +29,7 @@ import { Component,Input, OnInit } from '@angular/core';
         <app-activity-table *ngSwitchCase="4" [isWidget]="true" size="140px"></app-activity-table>
         <app-interactive-map-1 *ngSwitchCase="6" [isWidget]="true"></app-interactive-map-1>
         <app-fleet *ngSwitchCase="-1" [isWidget]="true"></app-fleet>
+        <app-create-order *ngSwitchCase="5"></app-create-order>
         <div *ngSwitchDefault></div>
       </div>
       </mat-card-content>

@@ -15,20 +15,23 @@ const routes: Routes = [
   {path:'',component:HomeComponent,title:'home'},
   {path:'dashboard',component:DashboardComponent},
   {path:'operations',component:SchedulesComponent,title:'operations'},
-  {path:'fleet',component:FleetComponent,title:'fleet'},
+  {path:'fleet',component:FleetComponent,title:'fleet',
+    children:[
+      {path:':id',component:RigInfoComponent,title:'rig-info'}
+    ]
+  },
+
+
+
   {path:'map',component:MapComponent,title:'map'},
   {path:'freight',component:FreightComponent,title:'freight'},
   {path:'op-details/:OpId',component:OperationInfoComponent,title:'operation'},
   {path:'train-details/:trainId',component:TrainInfoComponent,title:'train'},
   {path:'login',component:LoginComponent,title:'login'},
   
-  {path: 'fleet',component: FleetComponent,children: [{
-        path: ':rigId',
-        component: RigInfoComponent,
-        outlet: 'rigInfo' // Named outlet
-      }
-    ]
-  }
+  
+  
+  
   ];
 
 @NgModule({

@@ -1,0 +1,54 @@
+<div>
+    <h2 mat-dialog-title>Create new operation</h2>
+<mat-dialog-content>
+  <p>Fill in all required fields</p>
+  <form [formGroup]="operationdata">
+    <div class="container hide-scrollbar" style="overflow-y: scroll;">
+        <div class="row">
+            <div class="col-6">
+                <h4 style="font-weight: lighter;">create schedule:</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <mat-label>Departure</mat-label>
+                          <!--departure-------------------------------------------------------------->  
+                            <mat-select formControlName="departure_location">
+                              <mat-option>None</mat-option>
+                              @for (state of states; track state) {
+                                <mat-option [value]="state.location_name">{{state.location_name}}</mat-option>
+                              }
+                            </mat-select>
+                          </mat-form-field><br>
+                          <mat-form-field>
+                            <mat-label >Arrival</mat-label>
+                            <mat-select formControlName="arrival_location">
+                              <mat-option>None</mat-option>
+                              @for (state of states; track state) {
+                                <mat-option [value]="state.location_name">{{state.location_name}}</mat-option>
+                              }
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button (click)="confirmed()" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>
+</div>

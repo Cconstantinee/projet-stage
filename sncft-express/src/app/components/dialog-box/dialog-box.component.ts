@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class DialogBoxComponent {
   confirm: string = '';
   id?: number;
-
+  startLoading:boolean=false;
   constructor(private operationsService:OperationsService,private router:Router,
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any // To receive data passed to the dialog
@@ -20,20 +20,24 @@ export class DialogBoxComponent {
   }
 
   confirmed(): void {
+    this.startLoading=true;
     if (this.confirm === 'yes') {
       console.log('Deletion confirmed');
       
         this.operationsService.deleteOperation(this.id).subscribe(
           (res)=>{console.log(res);
           this.operationsService.cachedOperations=null;
+          this.startLoading=false;
           this.router.navigate(['/operations']);
+          this.dialogRef.close(true);
           },
           (error)=>{console.log(error);
-          
+          alert('there was a porblem dropping the operation');
+          this.startLoading=false;
           }
         )
       
-      this.dialogRef.close(true); // Close dialog and pass true as result
+       // Close dialog and pass true as result
     } else {
       alert('Please type "yes" to confirm.'); // Show alert if not 'yes'
     }

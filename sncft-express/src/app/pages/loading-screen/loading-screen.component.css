@@ -1,0 +1,15 @@
+p{
+    color:gray;
+}
+
+.ready {
+    color: green; /* For 'ready' status */
+  }
+  
+  .error {
+    color: red; /* For 'error' status */
+  }
+  
+  .pending {
+    color: orange; /* For 'pending' status */
+  }

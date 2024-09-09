@@ -1,17 +1,20 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, Input,Output,EventEmitter } from '@angular/core';
+import { Router , ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-data-widget',
   template: `
     <div class="p-2">
-    <mat-card matRipple [matRippleTrigger]="trigger" appearance="raised" style="height:120px">
+    <mat-card matRipple [matRippleTrigger]="trigger" appearance="raised" style="height:120px" [ngClass]="{
+        'locomotive-background': id.startsWith('E'),
+        'wagon-background': id.startsWith('C')
+    }">
       <mat-card-header class="spaced-header z-1">
         <mat-card-title class="d-flex mb-2">
           {{id}}
         </mat-card-title>
         <div #trigger>
-        <a mat-icon-button (click)="goToRig(id)" (mouseover)="iconColor = 'green'" (mouseout)="iconColor = 'lightgray'">
+        <a mat-icon-button (click)="goToRig(id)" (mouseover)="iconColor = 'green'" (mouseout)="iconColor = 'gray'">
           <mat-icon [style.color]="iconColor">open_in_new</mat-icon>
         </a>
         </div>
@@ -33,12 +36,14 @@ import { Router } from '@angular/router';
 })
 export class DataWidgetComponent{
   
-  iconColor: string = 'lightgray';
+  iconColor: string = 'gray';
   @Input() id:string="N/A";
   @Input() rig_status:string="-no data-";
   @Input() maintenance_status:string="-no data-"
   @Input() isWidget:boolean=false;
-  constructor(private router: Router) {}
+  @Output() dataEvent = new EventEmitter<string>();
+
+  constructor(private router: Router,private route:ActivatedRoute) {}
 
   getRigStatusClass(): string {
     switch (this.rig_status) {
@@ -72,6 +77,6 @@ export class DataWidgetComponent{
     }
   }
   goToRig(rigId: string) {
-    this.router.navigate([{ outlets: { rigInfo: [`fleet/${rigId}`] } }]);
+    this.dataEvent.emit(rigId);
   }
 }

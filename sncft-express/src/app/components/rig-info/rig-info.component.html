@@ -1,1 +1,29 @@
-<p>rig-info works!</p>
+<div class="p-5" [ngClass]="{
+    'locomotive-background': rigId?.startsWith('E'),
+    'wagon-background': rigId?.startsWith('C')
+}" style="height: 80vh;width: 80vw;">
+    <div style="width: 90%;">
+        
+    
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div *ngIf="!isLoading">
+        <h2>Rig Information</h2>
+        <div>
+          <strong>Rig ID:</strong> {{ rigId }}<br>
+          <strong>Rig Type:</strong> {{ rigdata.rigInfo.rig_type }}<br>
+          <strong>Rig Status:</strong> {{ rigdata.rigInfo.rig_status }}<br>
+          <strong>Maintenance Status:</strong> {{ rigdata.rigInfo.maintenance_status }}<br>
+          <strong>Notes:</strong> {{ rigdata.rigInfo.notes }}<br>
+          <strong>Created At:</strong> {{ rigdata.rigInfo.created_at | date: 'medium' }}<br>
+          <strong>Updated At:</strong> {{ rigdata.rigInfo.updated_at | date: 'medium' }}<br>
+        </div>
+      
+        <h2>Locomotive Data</h2>
+        <div>
+          <strong>Locomotive ID:</strong> {{ rigdata.rigData.locomotive_id }}<br>
+          <strong>Locomotive Model:</strong> {{ rigdata.rigData.locomotive_model }}<br>
+        </div>
+      </div>
+      
+    </div>
+</div>

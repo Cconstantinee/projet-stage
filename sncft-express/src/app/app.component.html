@@ -1,4 +1,11 @@
-<app-angular-toolbar></app-angular-toolbar>
+@if(locations_status=='pending'||operations_status=='pending'||fleet_status=='pending'||freight_status=='pending'){
+  <div style="position: absolute;z-index: 199;" @fadeOut>
+    <app-loading-screen [fleet_status]="fleet_status" [freight_status]="freight_status" [operations_status]="operations_status" [locations_status]="locations_status" ></app-loading-screen>
+  </div>
+}
+
+<div>
+  <app-angular-toolbar></app-angular-toolbar>
 <mat-tab-group (selectedTabChange)="onTabChange($event)" [(selectedIndex)]="selectedTabIndex" *ngIf="currentRoute !== '/'&&currentRoute!=='/login'">
   <mat-tab label="Dashboard"></mat-tab>
   <mat-tab label="Operations"></mat-tab>
@@ -9,3 +16,4 @@
   
 
 <router-outlet></router-outlet>
+</div>

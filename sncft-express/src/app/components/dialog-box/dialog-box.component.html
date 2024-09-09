@@ -1,10 +1,19 @@
 <h2 mat-dialog-title>Warning</h2>
 <mat-dialog-content>
   <p>The following operation with the id {{id}} will be deleted, do you want to proceed?</p>
-  <mat-form-field>
-    <mat-label>Type yes to continue</mat-label>
-    <input matInput [(ngModel)]="confirm" />
-  </mat-form-field>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field>
+          <mat-label>Type yes to continue</mat-label>
+          <input matInput [(ngModel)]="confirm" />
+        </mat-form-field>
+      </div>
+      <div class="col-6 d-flex justify-content-center">
+        <mat-spinner mode="indeterminate" *ngIf="startLoading"></mat-spinner>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Cancel</button>

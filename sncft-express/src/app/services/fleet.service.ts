@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class FleetService {
   private cachedFleet: fleet[] | null = null; // Cache for all operations
-  private rigCache: Map<number, rig> = new Map(); // Cache for individual operations
+  private rigCache:any // Cache for individual operations
 
   REST_API: string = 'http://localhost:8082/api/fleet';
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
@@ -25,7 +25,11 @@ export class FleetService {
       catchError(this.handleError)
     );
   }
-
+  getRig(id:string|null):Observable<any>{
+    return this.httpClient.get<any>(`${this.REST_API}/${id}`).pipe(
+      tap((data:any) => this.rigCache= data), // Cache the data
+      catchError(this.handleError))
+  }
   
 
 

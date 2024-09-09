@@ -46,7 +46,12 @@ import {MatChipsModule} from '@angular/material/chips';
 import { RigInfoComponent } from './components/rig-info/rig-info.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LoadingScreenComponent } from './pages/loading-screen/loading-screen.component'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { OperationFormComponent } from './components/operation-form/operation-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +71,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     LoginComponent,
     DataWidgetComponent,
     RigInfoComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    LoadingScreenComponent,
+    CreateOrderComponent,
+    OperationFormComponent
     
     
     
@@ -99,7 +107,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatRippleModule,
     MatChipsModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
 ],
   providers: [
     provideAnimationsAsync()

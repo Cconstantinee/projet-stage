@@ -6,5 +6,9 @@ export interface fleet{
 }
 
 export interface rig{
+    rig_id:string,
+    rig_type:string,
+    rig_status:string,
+    maintenance_status:string
     note:string;
 }

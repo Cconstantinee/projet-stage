@@ -1,0 +1,20 @@
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column" style="height: 100vh;width: 100vw; background-color: white;">
+    <img src="../../../assets/sncftexpress.svg" alt="" height="200px" class="m-3">
+
+    <mat-progress-bar mode="indeterminate" style="width: 80vw;"></mat-progress-bar>
+    <div class="row m-2 p-2">
+        <div class="col text-center" style="width: 400px;">
+            <p>Loading operations...</p>
+            <p>Loading fleet...</p>
+            <p>Loading locations...</p>
+            <p>Loading freight...</p>
+        </div>
+        <div class="col text-center">
+            <p id="operations" [ngClass]="getStatusClass(operations_status)">{{ operations_status }}</p>
+            <p id="fleet" [ngClass]="getStatusClass(fleet_status)">{{ fleet_status }}</p>
+            <p id="locations" [ngClass]="getStatusClass(locations_status)">{{ locations_status }}</p>
+            <p id="freight" [ngClass]="getStatusClass(freight_status)">{{ freight_status }}</p>
+        </div>
+        
+    </div>
+</div>

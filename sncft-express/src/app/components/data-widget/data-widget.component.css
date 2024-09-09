@@ -62,3 +62,16 @@
   background-color: #e0e0e0; /* Light gray */
   color: gray;
 }
+
+.locomotive-background{
+  background-image: url('../../../assets/locomotive.png');
+  background-position: center right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.wagon-background{
+  background-image: url('../../../assets/wagon.png');
+  background-position: center right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
